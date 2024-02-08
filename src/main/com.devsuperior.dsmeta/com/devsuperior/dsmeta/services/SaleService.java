@@ -2,6 +2,7 @@ package com.devsuperior.dsmeta.services;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.devsuperior.dsmeta.dto.SaleMinDTO;
+import com.devsuperior.dsmeta.dto.SaleSumaryDTO;
 import com.devsuperior.dsmeta.entities.Sale;
 import com.devsuperior.dsmeta.repositories.SaleRepository;
 
@@ -31,6 +33,14 @@ public class SaleService {
 		LocalDate max = this.validateMaxDate(maxDate);
 		
 		return repository.searchReport(min, max, name, pageable);	
+	}
+	
+	public List<SaleSumaryDTO> searchSumary(String minDate, String maxDate){
+		LocalDate min = this.validateMinDate(minDate);
+		LocalDate max = this.validateMaxDate(maxDate);
+		
+		return repository.searchSumary(min, max).stream().map(x->new SaleSumaryDTO(x)).toList();
+		
 	}
 
 	private LocalDate validateMaxDate(String maxDate) {
