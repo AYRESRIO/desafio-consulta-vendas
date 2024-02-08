@@ -62,5 +62,12 @@ public class SaleMinDTO {
 		this.sellerName = sellerName;
 	}
 
+
+	@Override
+	public String toString() {
+		return "SaleMinDTO [id=" + id + ", amount=" + amount + ", date=" + date + ", sellerName=" + sellerName + "]";
+	}
+	
+
 	
 }
